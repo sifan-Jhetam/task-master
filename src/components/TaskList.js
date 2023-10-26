@@ -8,6 +8,7 @@ import TaskCard from "./TaskCard"
 import { Container, Row, Col } from "react-bootstrap"
 import InputForm from "./InputForm.js"
 import { useColorScheme } from "./DarkMode/colorScheme"
+import { SortingList } from "./sortingList"
 
 
 export default function TaskList() {
@@ -15,10 +16,14 @@ export default function TaskList() {
     const [task, setTask] = useState([]);
     let [count, setCount] = useState(1);
     const { currentUser } = useAuth()
-    let {isDark}=useColorScheme();
-    let color=";"
-    if(isDark){color="grey"}
-    else(color="white")
+    const [sorting, setSorting] = useState({
+        priority: "default",
+        status: "default"
+    })
+    let { isDark } = useColorScheme();
+    let color = ";"
+    if (isDark) { color = "grey" }
+    else (color = "white")
 
     useEffect(() => {
         console.log("innn")
@@ -59,18 +64,39 @@ export default function TaskList() {
             <NavBar />
             <Container>
                 <Row  >
-                    <Col xs="12" lg="8" style={{ margin: "auto", boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px", marginBottom:"20px",marginTop:"10px", padding:"20px", backgroundColor:color }}>
+                    <Col xs="12" lg="8" style={{ margin: "auto", boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px", marginBottom: "20px", marginTop: "10px", padding: "20px", backgroundColor: color }}>
                         <InputForm currentUser={currentUser} updater={updater} />
                     </Col>
                 </Row>
+                <Row>
+                    <SortingList setSorting={setSorting} sorting={sorting} />
+                </Row>
                 <Row mx={2}>
-                    {
+                    {sorting.priority == "default" && (
                         task.map((d) => {
                             return (
                                 <Col key={d.id} xs="12" lg="4">
                                     <TaskCard data={d} currentUser={currentUser} updater={updater} />
                                 </Col>)
                         })
+                    )}
+
+
+                    {
+                        sorting.priority !== "default" && (
+                            task.filter((d) => {
+                                if (d.priority == sorting.priority) {
+                                    return (
+                                        <Col key={d.id} xs="12" lg="4">
+                                            <TaskCard data={d} currentUser={currentUser} updater={updater} />
+                                        </Col>
+                                    )
+                                }
+                                else {
+                                    return false
+                                }
+                            })
+                        )
                     }
                 </Row>
             </Container>

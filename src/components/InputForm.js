@@ -2,15 +2,15 @@ import React from "react"
 import { useState } from "react"
 import { Form, Col, Row, Button } from "react-bootstrap"
 import { addTask } from "../services/fireApi"
-import { Space , Select} from "antd"
+import { Space, Select } from "antd"
 
 export default function InputForm({ currentUser, updater }) {
 
   let [inputData, setInputData] = useState({
     taskName: "",
     description: "",
-    priority:"low",
-    status:"pending"
+    priority: "low",
+    status: "pending"
   })
 
   function handleTask(e) {
@@ -29,7 +29,7 @@ export default function InputForm({ currentUser, updater }) {
     })
   }
 
-  function handlePriority(e){
+  function handlePriority(e) {
     setInputData((prev) => {
       let temp = prev;
       temp.priority = e
@@ -37,7 +37,7 @@ export default function InputForm({ currentUser, updater }) {
     })
   }
 
-  function handleStatus(e){
+  function handleStatus(e) {
     console.log(e)
     setInputData((prev) => {
       let temp = prev;
@@ -55,7 +55,7 @@ export default function InputForm({ currentUser, updater }) {
       setInputData((prev) => {
         let temp = prev;
         temp.status = "pending"
-        temp.priority="low"
+        temp.priority = "low"
         return temp
       })
     }
@@ -76,39 +76,39 @@ export default function InputForm({ currentUser, updater }) {
           </Col>
 
           <Col xs="12" lg="3">
-          <Form.Label>Priority</Form.Label>
-              <Space wrap >
-                <Select
-                  defaultValue="low"
-                  placeholder="Select priority"
-                  style={{ width: 120 }}
-                  value={inputData.priority}
-                  onChange={handlePriority}
-                  options={[
-                    { value: 'low', label: 'low' },
-                    { value: 'medium', label: 'medium' },
-                    { value: 'high', label: 'high' },
-                  ]}
-                />
-                </Space>
+            <Form.Label>Priority</Form.Label>
+            <Space wrap >
+              <Select
+                defaultValue="low"
+                placeholder="Select priority"
+                style={{ width: 120 }}
+                value={inputData.priority}
+                onChange={handlePriority}
+                options={[
+                  { value: 'low', label: 'low' },
+                  { value: 'medium', label: 'medium' },
+                  { value: 'high', label: 'high' },
+                ]}
+              />
+            </Space>
           </Col>
 
           <Col xs="12" lg="3">
-          <Form.Label>Status</Form.Label>
-              <Space wrap >
-                <Select
-                  defaultValue="pending"
-                  placeholder="Select Status"
-                  value={inputData.status}
-                  style={{ width: 120 }}
-                  onChange={handleStatus}
-                  options={[
-                    { value: 'pending', label: 'pending' },
-                    { value: 'completed', label: 'completed' },
-                  
-                  ]}
-                />
-                </Space>
+            <Form.Label>Status</Form.Label>
+            <Space wrap >
+              <Select
+                defaultValue="pending"
+                placeholder="Select Status"
+                value={inputData.status}
+                style={{ width: 120 }}
+                onChange={handleStatus}
+                options={[
+                  { value: 'pending', label: 'pending' },
+                  { value: 'completed', label: 'completed' },
+
+                ]}
+              />
+            </Space>
           </Col>
 
         </Row>

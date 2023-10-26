@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import { useColorScheme } from "./DarkMode/colorScheme"
 
 export default function UpdateProfile() {
   const emailRef = useRef()
@@ -41,14 +42,26 @@ export default function UpdateProfile() {
       })
   }
 
+  let { isDark } = useColorScheme()
+    let color = ""
+    let bgcolor = ""
+    if (isDark) {
+        color = "white"
+        bgcolor = "grey"
+    }
+    else {
+        bgcolor = "white"
+        color = "black"
+    }
+
   return (
     <>
       <Container
       className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: "100vh" }}
+      style={{ minHeight: "100vh"}}
     >
       <div className="w-100" style={{ maxWidth: "400px" }}>
-      <Card>
+      <Card style={{backgroundColor:bgcolor, color:color}}>
         <Card.Body>
           <h2 className="text-center mb-4">Update Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
