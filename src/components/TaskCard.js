@@ -48,23 +48,25 @@ export default function TaskCard({ data, currentUser, updater }) {
 
 
     let [inputData, setInputData] = useState({
-        taskName: "",
-        description: "",
-        priority: "low",
-        status: "pending"
+        taskName: data.taskName,
+        description: data.description,
+        priority: data.priority,
+        status: data.status
     })
 
     function handleTask(e) {
+        e.persist()
         setInputData((prev) => {
-            let temp = prev;
+            let temp = {...prev}
             temp.taskName = e.target.value;
             return temp
         })
     }
 
     function handleDesc(e) {
+        e.persist()
         setInputData((prev) => {
-            let temp = prev;
+            let temp = {...prev}
             temp.description = e.target.value
             return temp
         })
@@ -72,7 +74,7 @@ export default function TaskCard({ data, currentUser, updater }) {
 
     function handlePriority(e) {
         setInputData((prev) => {
-            let temp = prev;
+            let temp = {...prev}
             temp.priority = e
             return temp
         })
@@ -81,7 +83,7 @@ export default function TaskCard({ data, currentUser, updater }) {
     function handleStatus(e) {
         console.log(e)
         setInputData((prev) => {
-            let temp = prev;
+            let temp = {...prev}
             temp.status = e
             return temp
         })
@@ -134,6 +136,7 @@ export default function TaskCard({ data, currentUser, updater }) {
                     onCancel={() => setUpdateModal(false)}
                     okText="Update Task"
                     cancelText="cencel"
+                    style={{padding:"10px"}}
                 >
                     <>
                         <Form >
@@ -141,7 +144,7 @@ export default function TaskCard({ data, currentUser, updater }) {
                                 <Col xs="12" lg="6">
                                     <Form.Group className="mb-3">
                                         <Form.Label>Task</Form.Label>
-                                        <Form.Control type="text" placeholder="Enter Task " onChange={(e) => handleTask(e)} />
+                                        <Form.Control type="text" value={inputData.taskName} placeholder="Enter Task " onChange={(e) => handleTask(e)} />
                                     </Form.Group>
                                 </Col>
 
@@ -184,7 +187,7 @@ export default function TaskCard({ data, currentUser, updater }) {
                             </Row>
                             <Form.Group className="mb-3" >
                                 <Form.Label>Description</Form.Label>
-                                <Form.Control as="textarea" rows={3} onChange={(e) => handleDesc(e)} />
+                                <Form.Control as="textarea" value={inputData.description} rows={3} onChange={(e) => handleDesc(e)} />
                             </Form.Group>
                             {/* <Button type="submit">Submit form</Button> */}
                         </Form>

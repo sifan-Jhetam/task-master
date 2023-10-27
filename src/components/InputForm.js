@@ -14,33 +14,36 @@ export default function InputForm({ currentUser, updater }) {
   })
 
   function handleTask(e) {
+    e.persist()
     setInputData((prev) => {
-      let temp = prev;
-      temp.taskName = e.target.value;
+      let temp = {...prev}
+      temp.taskName =e.target.value;
       return temp
     })
   }
 
   function handleDesc(e) {
+    e.persist()
     setInputData((prev) => {
-      let temp = prev;
+      let temp ={...prev}
       temp.description = e.target.value
       return temp
     })
   }
 
   function handlePriority(e) {
+
     setInputData((prev) => {
-      let temp = prev;
+      let temp ={ ...prev}
       temp.priority = e
       return temp
     })
   }
 
   function handleStatus(e) {
-    console.log(e)
+
     setInputData((prev) => {
-      let temp = prev;
+      let temp ={...prev}
       temp.status = e
       return temp
     })
@@ -51,13 +54,16 @@ export default function InputForm({ currentUser, updater }) {
     console.log(inputData)
     try {
       await addTask(currentUser.email, inputData)
-      updater()
+      
       setInputData((prev) => {
         let temp = prev;
         temp.status = "pending"
         temp.priority = "low"
+        temp.taskName=""
+        temp.description=""
         return temp
       })
+      updater()
     }
     catch (err) {
       console.log(err)
@@ -71,7 +77,7 @@ export default function InputForm({ currentUser, updater }) {
           <Col xs="12" lg="6">
             <Form.Group className="mb-3">
               <Form.Label>Task</Form.Label>
-              <Form.Control type="text" placeholder="Enter Task " onChange={(e) => handleTask(e)} />
+              <Form.Control type="text" value={inputData.taskName} placeholder="Enter Task " onChange={(e) => handleTask(e)} />
             </Form.Group>
           </Col>
 
@@ -114,7 +120,7 @@ export default function InputForm({ currentUser, updater }) {
         </Row>
         <Form.Group className="mb-3" >
           <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" rows={3} onChange={(e) => handleDesc(e)} />
+          <Form.Control as="textarea" value={inputData.description} rows={3} onChange={(e) => handleDesc(e)} />
         </Form.Group>
         <Button type="submit">Submit form</Button>
       </Form>
