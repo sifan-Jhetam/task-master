@@ -2,7 +2,7 @@ import React from "react"
 import Card from 'react-bootstrap/Card';
 import { updataTask, DeleteTask } from "../services/fireApi";
 import { useColorScheme } from "./DarkMode/colorScheme";
-import { Row, Col, Form, Button } from "react-bootstrap";
+import { Row, Col, Form} from "react-bootstrap";
 import { Modal, Select, Space } from "antd";
 import { useState } from "react";
 
@@ -89,25 +89,6 @@ export default function TaskCard({ data, currentUser, updater }) {
         })
     }
 
-    //   async function handleSubmit(e) {
-    //     e.preventDefault();
-    //     console.log(inputData)
-    //     try {
-    //       await addTask(currentUser.email, inputData)
-    //       updater()
-    //       setInputData((prev) => {
-    //         let temp = prev;
-    //         temp.status = "pending"
-    //         temp.priority="low"
-    //         return temp
-    //       })
-    //     }
-    //     catch (err) {
-    //       console.log(err)
-    //     }
-    //   }
-
-
 
     return (
         <>
@@ -189,7 +170,6 @@ export default function TaskCard({ data, currentUser, updater }) {
                                 <Form.Label>Description</Form.Label>
                                 <Form.Control as="textarea" value={inputData.description} rows={3} onChange={(e) => handleDesc(e)} />
                             </Form.Group>
-                            {/* <Button type="submit">Submit form</Button> */}
                         </Form>
 
                     </>

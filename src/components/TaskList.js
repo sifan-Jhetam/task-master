@@ -44,16 +44,6 @@ export default function TaskList() {
         getAllData()
     }, [count])
 
-    // let deleteFromLocalList = (id) => {
-    //     console.log("deleet", id)
-    //     setTask((prev) => {
-    //         return prev.filter((d) => {
-    //             console.log(id, "===", d.id)
-    //             return id !== d.id
-    //         })
-    //     })
-    // }
-
     let updater = () => {
         setCount((prev) => prev + 1)
     }
@@ -68,11 +58,11 @@ export default function TaskList() {
                         <InputForm currentUser={currentUser} updater={updater} />
                     </Col>
                 </Row>
-                <Row>
+                <Row style={{color:color}}>
                     <SortingList setSorting={setSorting} sorting={sorting} />
                 </Row>
                 <Row mx={2}>
-                    {sorting.priority == "default" && (
+                    {sorting.priority === "default" && (
                         task.map((d) => {
                             return (
                                 <Col key={d.id} xs="12" lg="4">
@@ -81,21 +71,16 @@ export default function TaskList() {
                         })
                     )}
 
-
                     {
                         sorting.priority !== "default" && (
-                            task.filter((d) => {
-                                if (d.priority == sorting.priority) {
-                                    return (
-                                        <Col key={d.id} xs="12" lg="4">
-                                            <TaskCard data={d} currentUser={currentUser} updater={updater} />
-                                        </Col>
-                                    )
-                                }
-                                else {
-                                    return false
-                                }
-                            })
+                           task.filter((f)=>f.priority===sorting.priority)
+                           .map((d)=>{
+                            return(
+                                <Col key={d.id} xs="12" lg="4">
+                                <TaskCard data={d} currentUser={currentUser} updater={updater} />
+                            </Col>
+                            )
+                           })
                         )
                     }
                 </Row>
