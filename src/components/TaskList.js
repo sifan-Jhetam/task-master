@@ -10,7 +10,6 @@ import InputForm from "./InputForm.js"
 import { useColorScheme } from "./DarkMode/colorScheme"
 import { SortingList } from "./sortingList"
 
-
 export default function TaskList() {
 
     const [task, setTask] = useState([]);
@@ -21,9 +20,10 @@ export default function TaskList() {
         status: "default"
     })
     let { isDark } = useColorScheme();
-    let color = ";"
-    if (isDark) { color = "grey" }
-    else (color = "white")
+    let color = ""
+    let bgColor=""
+    if (isDark) { color = "white"; bgColor="grey" }
+    else {color = "black"; bgColor="white"}
 
     useEffect(() => {
         console.log("innn")
@@ -54,11 +54,14 @@ export default function TaskList() {
             <NavBar />
             <Container>
                 <Row  >
-                    <Col xs="12" lg="8" style={{ margin: "auto", boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px", marginBottom: "20px", marginTop: "10px", padding: "20px", backgroundColor: color }}>
+                    <Col xs="12" lg="8"
+                        style={{ margin: "auto", boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px", 
+                        marginBottom: "20px", marginTop: "10px", padding: "20px", backgroundColor: bgColor   }}
+                    >
                         <InputForm currentUser={currentUser} updater={updater} />
                     </Col>
                 </Row>
-                <Row style={{color:color}}>
+                <Row style={{ color: color }}>
                     <SortingList setSorting={setSorting} sorting={sorting} />
                 </Row>
                 <Row mx={2}>
@@ -73,14 +76,14 @@ export default function TaskList() {
 
                     {
                         sorting.priority !== "default" && (
-                           task.filter((f)=>f.priority===sorting.priority)
-                           .map((d)=>{
-                            return(
-                                <Col key={d.id} xs="12" lg="4">
-                                <TaskCard data={d} currentUser={currentUser} updater={updater} />
-                            </Col>
-                            )
-                           })
+                            task.filter((f) => f.priority === sorting.priority)
+                                .map((d) => {
+                                    return (
+                                        <Col key={d.id} xs="12" lg="4">
+                                            <TaskCard data={d} currentUser={currentUser} updater={updater} />
+                                        </Col>
+                                    )
+                                })
                         )
                     }
                 </Row>
