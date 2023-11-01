@@ -18,7 +18,7 @@ function App() {
         <Router>
           <AuthProvider>
             <Switch>
-              <PrivateRoute exact path="/" component={TaskList} />
+              <PrivateRoute exact path="https://sifan-jhetam.github.io/task-master/" component={TaskList} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
