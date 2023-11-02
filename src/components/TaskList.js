@@ -62,7 +62,7 @@ export default function TaskList() {
     return (
         <>
             <NavBar />
-            <Container>
+            <Container >
                 <Row  >
                     <Col xs="12" lg="8"
                         style={{ margin: "auto", boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px", 

@@ -1,5 +1,6 @@
 import React from "react"
 import { Select, Space } from "antd"
+import { Col } from "react-bootstrap"
 
 export function SortingList({setSorting,sorting}){
 
@@ -26,7 +27,9 @@ export function SortingList({setSorting,sorting}){
     return(
 
         <>
+                <Col lg="3">
                 <Space wrap >
+                  <span>Select Priority</span>
                 <Select
                   defaultValue="defult"
                   placeholder="Select Priority"
@@ -42,8 +45,11 @@ export function SortingList({setSorting,sorting}){
                   ]}
                 />
                 </Space>
+                </Col>
 
+                <Col lg="3">
                 <Space wrap >
+                <span>Select Status</span>
                 <Select
                   defaultValue="default"
                   placeholder="Select Status"
@@ -57,6 +63,7 @@ export function SortingList({setSorting,sorting}){
                   ]}
                 />
                 </Space>
+                </Col>
         </>
     )
 }

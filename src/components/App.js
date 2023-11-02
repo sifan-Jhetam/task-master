@@ -15,22 +15,23 @@ import { DarkModeToggle } from "./DarkMode/togler"
 function App() {
   return (
     <>
-    <div style={{position:"fixed",top:"15px",right:"40px",zIndex:"10"}}>
-      <DarkModeToggle />
+      <div className="dark-container">
+        <DarkModeToggle />
       </div>
-        <Router>
-          <AuthProvider>
-            <Switch>
-              <PrivateRoute exact path="/task-master" component={TaskList} />
-              <PrivateRoute path="/update-profile" component={UpdateProfile} />
-              <PrivateRoute path="/test" component={Test} />
-              <Route path="/signup" component={Signup} />
-              <Route path="/login" component={Login} />
-              <Route path="/forgot-password" component={ForgotPassword} />
-            </Switch>
-          </AuthProvider>
-        </Router>
-   
+      <Router>
+        <AuthProvider>
+          <Switch>
+            <PrivateRoute exact path="/" component={TaskList} />
+            <PrivateRoute exact path="/task-master" component={TaskList} />
+            <PrivateRoute path="/update-profile" component={UpdateProfile} />
+            <PrivateRoute path="/test" component={Test} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
+            <Route path="/forgot-password" component={ForgotPassword} />
+          </Switch>
+        </AuthProvider>
+      </Router>
+
     </>
   )
 }

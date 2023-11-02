@@ -1,4 +1,4 @@
-import { Navbar, Container, Button, Alert } from "react-bootstrap";
+import { Navbar, Container, Button, Alert, Nav } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import React from "react";
 import { useState } from "react";
@@ -14,7 +14,7 @@ export function NavBar() {
     const history = useHistory()
     let { isDark } = useColorScheme();
     let color = "blue"
-    
+
     if (isDark) {
         color = "grey"
     }
@@ -35,13 +35,33 @@ export function NavBar() {
 
     return (
         <>
-            <nav >
-            <Navbar className="bg-body-tertiary" style={{ backgroundColor: color,  }}>
+
+            {/* <Navbar expand="lg" className="bg-body-tertiary">
+                <Container>
+                    <Navbar.Brand >React-Bootstrap</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            <Button className="mx-2" variant="danger" onClick={handleLogout}>
+                                LogOut
+                            </Button>
+
+                            <Button variant="primary" onClick={() => history.push("task-master/update-profile")} >
+                                Update
+                            </Button>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar> */}
+
+
+            <Navbar expand="lg" className="bg-body-tertiary" style={{ backgroundColor: color,  }}>
                 <Container>
 
                     <Navbar.Brand href="#home">Task manager</Navbar.Brand>
-                    <Navbar.Toggle />
-                    <Navbar.Collapse className="justify-content-end">
+                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+                    <Navbar.Collapse className="basic-navbar-nav justify-content-end">
+                    <Nav className="me-auto">
                         <Navbar.Text>
                             Signed in as: <a href="#login">{currentUser.email}</a>
                         </Navbar.Text>
@@ -50,14 +70,15 @@ export function NavBar() {
                             LogOut
                         </Button>
 
-                        <Button variant="primary" onClick={() => history.push("/update-profile")} >
+                        <Button variant="primary" onClick={() => history.push("task-master/update-profile")} >
                             Update
                         </Button>
+                        </Nav>
                         {error && <Alert variant="danger">{error}</Alert>}
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            </nav>
+    
         </>
     )
 }

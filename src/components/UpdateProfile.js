@@ -32,7 +32,7 @@ export default function UpdateProfile() {
 
     Promise.all(promises)
       .then(() => {
-        history.push("/")
+        history.push("/task-master")
       })
       .catch(() => {
         setError("Failed to update account")
