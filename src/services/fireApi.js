@@ -1,5 +1,6 @@
 import { db } from "../firebase";
-import { getDocs, addDoc, collection, deleteDoc, doc, setDoc } from "firebase/firestore";
+import { getDocs, addDoc, collection, updateDoc, deleteDoc, doc, setDoc } from "firebase/firestore";
+import { useAuth } from "../contexts/AuthContext";
 
 
 export function getData(email) {
